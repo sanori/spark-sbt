@@ -10,4 +10,4 @@ cd spark-sbt
 sbt console
 ```
 
-The first time to run `sbt`, it may take several minutes or almost an hour to download spark modules.
+The first time to run `sbt console`, it may take several minutes or almost an hour to download Spark modules.
