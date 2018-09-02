@@ -4,12 +4,12 @@ lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       organization := "com.example",
-      scalaVersion := "2.11.11",
+      scalaVersion := "2.11.12",
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "SparkExample",
-    libraryDependencies += "org.apache.spark" %% "spark-core" % "2.1.0",
-    libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.1.0",
+    libraryDependencies += "org.apache.spark" %% "spark-core" % "2.3.1",
+    libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.3.1",
     libraryDependencies += scalaTest % Test
   )
 
