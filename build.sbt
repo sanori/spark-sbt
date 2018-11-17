@@ -14,14 +14,16 @@ lazy val root = (project in file(".")).
   )
 
 initialCommands in console := """
+  import org.apache.log4j.{Level, Logger}
   import org.apache.spark.sql.SparkSession
   import org.apache.spark.sql.functions._
-  val spark = SparkSession.builder()
-    .master("local")
+  Logger.getLogger("org.apache.spark").setLevel(Level.WARN)
+  val spark = SparkSession.builder
+    .master("local[*]")
     .appName("spark-shell")
-    .getOrCreate()
+    .getOrCreate
   import spark.implicits._
-  val sc = spark.sparkContext
+  lazy val sc = spark.sparkContext
 """
 
-cleanupCommands in console := "spark.stop()"
+cleanupCommands in console := "if (spark != null) spark.stop()"

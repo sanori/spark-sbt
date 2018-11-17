@@ -1,20 +1,25 @@
 package example
 
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.sql.SparkSession
 import org.scalatest._
 import funspec.AnyFunSpec
-import org.apache.spark.sql.SparkSession
 
-class ShakespeareSpec extends AnyFunSpec with BeforeAndAfter {
-  private var spark: SparkSession = _
-  before {
-    spark = SparkSession.builder
-      .master("local")
-      .appName("ShakespeareSpec")
-      .getOrCreate
+class ShakespeareSpec extends AnyFunSpec with BeforeAndAfterAll {
+  lazy val spark: SparkSession = SparkSession.builder
+    .master("local[*]")
+    .appName(this.getClass.getName)
+    .getOrCreate
+
+  override def beforeAll(): Unit = {
+    super.beforeAll()
+    Logger.getLogger("org.apache.spark").setLevel(Level.WARN)
+    spark
   }
 
-  after {
+  override def afterAll(): Unit = {
     if (spark != null) spark.stop()
+    super.afterAll()
   }
 
   describe("Shakespeare.df") {
