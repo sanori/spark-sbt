@@ -1,9 +1,10 @@
 package example
 
 import org.scalatest._
+import funspec.AnyFunSpec
 import org.apache.spark.sql.SparkSession
 
-class ShakespeareSpec extends FunSpec with BeforeAndAfter {
+class ShakespeareSpec extends AnyFunSpec with BeforeAndAfter {
   private var spark: SparkSession = _
   before {
     spark = SparkSession.builder
